@@ -9,7 +9,8 @@ from django.http import HttpResponse
 from .forms import ProductoForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
+from django.db import models
+from django.core.mail import send_mail
 
 
 from django import forms
@@ -111,7 +112,7 @@ def eliminar_del_carrito(request, producto_id):
         guardar_carrito(request, carrito)  # Actualizamos el carrito en la sesión
 
     return redirect('ver_carrito')
-=======
+
 # Vista para que el vendedor agregue o edite productos
 @login_required
 def agregar_modificar_producto(request, producto_id=None):
@@ -228,3 +229,25 @@ def generar_pdf_pedido(request, pedido_id):
     doc.build(elementos)
 
     return response
+
+
+#para lo nitificación de poco stock
+def noti_stock(request):
+    productos_bajo_stock = Producto.objects.filter(stock__lt=models.F('stock_minimo'))
+    if productos_bajo_stock.exists():
+        enviar_notificacion_stock(productos_bajo_stock)
+    return render(request, 'core/noti_stock.html', {'productos': productos_bajo_stock})
+
+def enviar_notificacion_stock(productos):
+    asunto = "Notificación: Productos con Bajo Stock"
+    mensaje = "Los siguientes productos tienen bajo stock:\n\n"
+    for producto in productos:
+        mensaje += f"- {producto.nombre}: {producto.stock} unidades (Mínimo: {producto.stock_minimo})\n"
+
+    send_mail(
+        asunto,
+        mensaje,
+        'noreply@example.com',  # correo ficticio como remitente
+        ['admin@example.com'],  # cambiar este correo al destinatario 
+        fail_silently=False,
+    )

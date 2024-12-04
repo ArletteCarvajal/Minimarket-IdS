@@ -47,7 +47,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core'
+    'core',
+    'django_cron',
+    'django_apscheduler',
 ]
 
 MIDDLEWARE = [
@@ -136,3 +138,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+CRON_CLASSES = [
+    "core.cron.NotificacionesStock",
+]
+
+CRONJOBS = [
+    ('*/1 * * * *', 'core.cron.NotificacionesStock')  # Esto programará el cron para ejecutarse cada minuto (ajusta según sea necesario)
+]
