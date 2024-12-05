@@ -239,7 +239,7 @@ def noti_stock(request):
     return render(request, 'core/noti_stock.html', {'productos': productos_bajo_stock})
 
 def enviar_notificacion_stock(productos):
-    asunto = "Notificación: Productos con Bajo Stock"
+    asunto = "Productos con Bajo Stock"
     mensaje = "Los siguientes productos tienen bajo stock:\n\n"
     for producto in productos:
         mensaje += f"- {producto.nombre}: {producto.stock} unidades (Mínimo: {producto.stock_minimo})\n"
@@ -248,6 +248,6 @@ def enviar_notificacion_stock(productos):
         asunto,
         mensaje,
         'noreply@example.com',  # correo ficticio como remitente
-        ['admin@example.com'],  # cambiar este correo al destinatario 
+        ['xxxx'],  # cambiar este correo al destinatario 
         fail_silently=False,
     )
