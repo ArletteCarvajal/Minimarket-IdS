@@ -4,6 +4,7 @@ from django_apscheduler.jobstores import DjangoJobStore
 from django_apscheduler.models import DjangoJobExecution
 from core.tasks import enviar_notificaciones  # Importa la tarea
 
+
 # Define la función al nivel superior
 def delete_old_job_executions(max_age=604_800):
     """Elimina registros antiguos de ejecuciones de tareas (más de 7 días por defecto)."""

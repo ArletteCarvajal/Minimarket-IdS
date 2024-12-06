@@ -47,9 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core'
-    'django.contrib.staticfiles',
-    
+    'core',
+    'django_apscheduler',    
 ]
 
 MIDDLEWARE = [
@@ -144,4 +143,4 @@ EMAIL_HOST = 'smtp.gmail.com'  # Servidor de Gmail
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True  # Usa TLS para encriptar el correo
 EMAIL_HOST_USER = 'xxxx'  # Tu correo
-EMAIL_HOST_PASSWORD = 'xxx'  # Tu contraseña
+EMAIL_HOST_PASSWORD = 'xxxx'  # Tu contraseña

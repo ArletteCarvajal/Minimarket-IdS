@@ -1,5 +1,7 @@
 from itertools import groupby
 from operator import itemgetter
+from core.models import Producto
+
 
 def enviar_notificaciones():
     print("Ejecutando enviar_notificaciones...")
